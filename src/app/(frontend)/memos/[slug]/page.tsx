@@ -4,6 +4,7 @@ import Link from "next/link";
 import { getPayloadClient } from "@/lib/payload";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import MemoEndorseButtons from "@/components/memo-endorse-buttons";
 import { RichText } from "@payloadcms/richtext-lexical/react";
 
 function getMediaUrl(media: unknown): string {
@@ -54,6 +55,7 @@ function RichTextOrHtml({ data, className }: { data: unknown; className?: string
 
 type Args = {
 	params: Promise<{ slug: string }>;
+	searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
 
 export async function generateMetadata({ params }: Args): Promise<Metadata> {
@@ -87,8 +89,14 @@ export async function generateMetadata({ params }: Args): Promise<Metadata> {
 	};
 }
 
-export default async function MemoPage({ params }: Args) {
+export default async function MemoPage({ params, searchParams }: Args) {
 	const { slug } = await params;
+	const sp = (await searchParams) ?? {};
+	const votedRaw = typeof sp.voted === "string" ? sp.voted : null;
+	const voted =
+		votedRaw === "endorse" || votedRaw === "oppose" ? votedRaw : null;
+	const voteError = typeof sp.voteError === "string" ? sp.voteError : null;
+
 	const payload = await getPayloadClient();
 	const { docs } = await payload.find({
 		collection: "memos",
@@ -98,6 +106,43 @@ export default async function MemoPage({ params }: Args) {
 
 	const memo = docs[0];
 	if (!memo) notFound();
+
+	const [endorse, oppose] = await Promise.all([
+		payload.find({
+			collection: "memo-endorsements",
+			where: {
+				and: [
+					{ memo: { equals: memo.id } },
+					{ stance: { equals: "endorse" } },
+				],
+			},
+			sort: "-updatedAt",
+			limit: 10,
+			depth: 1,
+		}),
+		payload.find({
+			collection: "memo-endorsements",
+			where: {
+				and: [
+					{ memo: { equals: memo.id } },
+					{ stance: { equals: "oppose" } },
+				],
+			},
+			sort: "-updatedAt",
+			limit: 10,
+			depth: 1,
+		}),
+	]);
+
+	const toVoter = (doc: { id: string | number; [key: string]: unknown }) => {
+		const m = doc.member as { id?: string | number; name?: string } | null;
+		return {
+			id: doc.id,
+			name: (m && typeof m === "object" && m.name) || "Anonymous",
+		};
+	};
+	const recentEndorsers = endorse.docs.map(toVoter);
+	const recentOpposers = oppose.docs.map(toVoter);
 
 	const builder =
 		memo.builder && typeof memo.builder === "object" ? memo.builder : null;
@@ -233,6 +278,16 @@ export default async function MemoPage({ params }: Args) {
 								className="memo-twitter-embed"
 							/>
 						)}
+
+						<MemoEndorseButtons
+							memoId={memo.id}
+							endorseCount={endorse.totalDocs}
+							opposeCount={oppose.totalDocs}
+							recentEndorsers={recentEndorsers}
+							recentOpposers={recentOpposers}
+							voted={voted}
+							voteError={voteError}
+						/>
 					</div>
 				</section>
 

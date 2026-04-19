@@ -11,10 +11,23 @@ import { Tools } from "./collections/tools";
 import { Builders } from "./collections/builders";
 import { Faqs } from "./collections/faqs";
 import { Users } from "./collections/users";
+import { CommunityMembers } from "./collections/community-members";
+import { MemoEndorsements } from "./collections/memo-endorsements";
 
 export default buildConfig({
 	editor: lexicalEditor(),
-	collections: [Users, Media, Teams, Memos, Posts, Tools, Builders, Faqs],
+	collections: [
+		Users,
+		Media,
+		Teams,
+		Memos,
+		Posts,
+		Tools,
+		Builders,
+		Faqs,
+		CommunityMembers,
+		MemoEndorsements,
+	],
 	db: postgresAdapter({
 		pool: {
 			connectionString: process.env.DATABASE_URL || "",
