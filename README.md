@@ -91,3 +91,11 @@ npx wrangler secret put DATABASE_URL --config worker/wrangler.jsonc
 | Schedule | Job |
 |----------|-----|
 | `0 * * * *` | Hourly job |
+
+## Tips for Open Source Contributors
+
+- If you use the default docker-compose to bring up a DB, the .env.example has a valid DATABASE_URL
+- Navigate to `/admin` to setup the first user.  You must use the string 'admin@buildcanada.com', else you won't be able to use all the features and you'll get auth issues.
+- You may need to comment out S3_BUCKET from .env, depending on your access and what you're doing. 
+
+
