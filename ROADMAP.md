@@ -6,7 +6,7 @@ This roadmap is intentionally focused only on the features related to enabling C
 
 We've chosen LinkedIn as a credibly neutral and aligned identity provider, as the initial source for Build Canada "Community Members" to link out to.  This was chosen for the credibility, cost, brand alignment, ease of integration, and pseudo-sybil resistance properties.
 
-The goal of stage 1 is to incorporate an external identity provider in a way that enables design, architectural experimentation, and user testing, such that the vision of future stages of the roadmap.
+The goal of stage 1 is to incorporate an external identity provider in a way that enables design, architectural experimentation, and user testing, to support the vision and future stages of the roadmap.
 
 We are here, but this stage is not complete.
 
@@ -22,14 +22,21 @@ Instead, they are at the bottom of pages, out of the way, and subtle.  The goal 
 6. Are there scaling considerations?
 7. What are the trade-offs when considering future identity providers? And can they be deduped?
 8. Do we need a "Community Member" page?
+9. Does this increase engagement? To people feel more included?
+
+If this works, it could be a 2x to 10x multiplier on distribution.
 
 ## Stage 2 - Add a second identity provider
 
-In stage 2, to goal is to expand the network effects of the community members, and validate UX decisions made in Stage 1.  The logic is that, if you can successfully add a 2nd, then you can succefully add N-more, as integration and data-support those decisions.
+In stage 2, the goal is to expand the network effects of the community members, and validate UX decisions made in Stage 1.  The logic is that, if you can successfully add a 2nd, then you can successfully add N-more, as integration-feasibility and data support those decisions.
+
+Every additional integration, widens the addressable user-base of would be community members.  Maybe they are a 1.2x, maybe it's 5x.  But there are at least a few.  
 
 ## Stage 3 - Leverage Results
 
-Start using the user-supplied data to expand Build Canada's mission.  Add features that analyze the results.  Use it when shaping future memos.  Find more creative use-cases.  Refine Build Canada's memo process to introduce more strucutured thinking with richer object models, supported by data.
+Start using the user-supplied data to expand Build Canada's mission.  Add features that analyze the results.  Use it when shaping future memos.  Find more creative use-cases.  Refine Build Canada's memo process to introduce more structured thinking with richer object models, supported by data.
+
+With the data in place, content will now have high social proof, which should help with virality.  This should get another 2x to 5x in distribution.  
 
 ## Stage 4 - Convert Signals from Information to Monetary
 
@@ -38,3 +45,7 @@ This stage is where it all starts to become rational, and focuses on one questio
 1. Will people click "I support + Donate"?
 2. Will people click "I am against this memo, but generally support Build Canada? Here have a donation to BC."
 3. Can contestable forms of governance be used with the above to ideas to allocate capital in order to accelerate BuildCanada's ambitions? 
+
+## Stage 5 - Mobilize the Community
+
+With a flywheel of >1 ROAS (return on ad spend), from an engaged community, mobilization can be possible by re-investing in the community with guerilla tactics that are fun, rewarding, and positive NPV for Build Canada and Canada. 
